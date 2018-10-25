@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Johnnys Task Keeper</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- Need to display tasks here -->
+    <!-- Also need to be able to add tasks here -->
+    <!-- And finally, be able to mark them as complete -->
+    <h1>Add new task!</h1>
+    <form action="/tasks" method="POST">
+      Task Name:<br>
+      <input type="text" name="task"><br>
+      Type of Task (to keep track of what I am working on):<br>
+      <input type="radio" name="type" value="frontend" checked>Front End<br>
+      <input type="radio" name="type" value="backend">Back End<br>
+      <input type="radio" name="type" value="database">Database<br>
+      <input type="radio" name="type" value="cloud">Cloud Stuff<br>
+      Number of Hours (estimate/best guess):<br>
+      <input type="text" name="hours"><br>
+      <input type="submit" value="Submit">
+    </form>
+    <h1>Current Tasks!</h1>
+    <div id="parent2">
+      Task Name, Task Type, Task Hours, Completion
+    </div>
+    <h1>Complete a task by ID</h1>
+    <form action="/completeTask" method="POST">
+      Task ID:<br>
+      <input type="text" name="tasknum"><br>
+      <input type="submit" value="Complete Task">
+    </form>
+  </body>
+</html>
+<script>
+// Load tasks
+$.get("/tasks", data => {
+  for(let i =0;i <data.length; i++){
+    var task = document.createElement('div')
+    var taskId = data[i].id
+    var taskName = data[i].taskName
+    var taskType = data[i].taskType
+    var taskHours = data[i].taskHours
+    var isComplete = data[i].isComplete
+    task.className = "task"
+    task.innerHTML = i+1 + '. ' + '<b>' + taskName + '</b> - ' + taskType + ' : ' + taskHours + ' - ' + isComplete + '<br>'
+    document.getElementById("parent2").appendChild(task)
+  }
+})
+</script>
