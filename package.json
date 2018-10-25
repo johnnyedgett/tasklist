@@ -4,7 +4,7 @@
   "description": "this is a small project to help me keep track of tasks :) ",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch src src/start.js",
+    "dev": "nodemon --watch src src/start.js --ignore tasks.json",
     "start": "",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
